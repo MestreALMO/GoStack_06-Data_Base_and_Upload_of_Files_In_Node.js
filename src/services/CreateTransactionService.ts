@@ -8,8 +8,8 @@ import Category from '../models/Category';
 
 interface Request {
   title: string;
-  type: 'income' | 'outcome';
   value: number;
+  type: 'income' | 'outcome';
   category: string;
 }
 
@@ -26,7 +26,7 @@ class CreateTransactionService {
     const { total } = await transactionsRepository.getBalance();
 
     if (type === 'outcome' && total < value) {
-      throw new AppError('You do not have enough balance');
+      throw new AppError('You do not have enough balance.');
     }
 
     let transactionCategory = await categoryRepository.findOne({
